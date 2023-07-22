@@ -3,3 +3,9 @@ ping:
 
 uptime:
 	ansible all -i inventory.ini -a 'uptime'
+
+install:
+	ansible-galaxy install -r requirements.yml
+
+setup:
+	ansible-playbook -i inventory.ini -vv setup.yml
