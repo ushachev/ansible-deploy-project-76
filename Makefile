@@ -9,3 +9,6 @@ install:
 
 setup:
 	ansible-playbook -i inventory.ini -vv setup.yml
+
+deploy:
+	ansible-playbook -i inventory.ini -vv deploy.yml
