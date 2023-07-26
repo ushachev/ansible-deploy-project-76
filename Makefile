@@ -12,3 +12,9 @@ setup:
 
 deploy:
 	ansible-playbook -i inventory.ini -vv deploy.yml
+
+edit-vault:
+	ansible-vault edit --vault-password-file vault-password group_vars/webservers/vault.yml
+
+view-vault:
+	ansible-vault view --vault-password-file vault-password group_vars/webservers/vault.yml
