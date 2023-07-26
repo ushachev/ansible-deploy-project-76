@@ -2,14 +2,24 @@
   hosts: webservers
   become: true
 
-  vars:
-    pip_install_packages:
-      - name: docker
-
   pre_tasks:
     - ansible.builtin.apt:
         update_cache: true
         cache_valid_time: 604800
 
   roles:
-    - geerlingguy.pip
+    - role: geerlingguy.pip
+      vars:
+        pip_install_packages:
+          - name: docker
+
+    - role: datadog.datadog
+      vars:
+        datadog_api_key: "{{ vault_datadog_api_key }}"
+        datadog_site: "datadoghq.eu"
+        datadog_checks:
+          http_check:
+            init_config:
+            instances:
+              - name: Check application health
+                url: http://localhost
